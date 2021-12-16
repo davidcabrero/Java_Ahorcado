@@ -6,6 +6,7 @@ package codigo;
 
 import java.awt.Image;
 import java.net.URL;
+import java.util.Random;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 
@@ -16,9 +17,11 @@ import javax.swing.JButton;
 public class VentanaAhorcado extends javax.swing.JFrame {
 
     String palabraOculta = "CETYS"; //Palabra a adivinar
-    //En esta primera versión del ahorcado, siempre es la misma palabra
+    String [] listaPalabras = {"CASA", "PELOTA", "COCHE", "GATO", "ORDENADOR", "AGUA", "PUEBLO", "PUERTA", "AMIGO"}; //Lista de palabras
+    String [] listaPalabras2 = new String [9];
     
     int numeroFallos = 0;
+    
     
     public void chequeaLetra(String letra){
         letra = letra.toUpperCase(); //convierto la letra en mayúscula
@@ -39,13 +42,14 @@ public class VentanaAhorcado extends javax.swing.JFrame {
         }
     }
     
-    public void chequeaBoton(JButton miBoton){
+    public void chequeaBoton(JButton miBoton){ //PARA LOS BOTONES DE LETRAS
         miBoton.setEnabled(false);
         chequeaLetra(miBoton.getText());
     }
+    
     private void dibujaImagen(int numeroImagen){
         URL nombreImagen = null;
-        switch(numeroImagen){ //Imagenes ahorcado fallos.
+        switch(numeroImagen){ //Imagenes ahorcado
             case 0 : nombreImagen=getClass().getResource("/imagenes/ahorcado_0.png"); break;
             case 1 : nombreImagen=getClass().getResource("/imagenes/ahorcado_1.png"); break;
             case 2 : nombreImagen=getClass().getResource("/imagenes/ahorcado_2.png"); break;
@@ -63,6 +67,22 @@ public class VentanaAhorcado extends javax.swing.JFrame {
     public VentanaAhorcado() {
         initComponents();
         dibujaImagen(0);
+        palabraOculta = palabraEnPantalla(listaPalabras);
+        escribeGuiones();
+        //System.out.print(palabraOculta);
+    }
+    
+    private String palabraEnPantalla (String [] lista){ //Palabra aleatoria de la lista sale en pantalla
+        Random aleatorio = new Random();
+        return lista[aleatorio.nextInt(lista.length)];
+    }
+    
+    private void escribeGuiones(){ //Numero de guiones según palabra
+        String auxiliar = "";
+        for (int i=0; i<palabraOculta.length(); i++){
+        auxiliar = auxiliar + "_ ";
+    }
+        panelGuiones.setText(auxiliar);
     }
 
     /**
