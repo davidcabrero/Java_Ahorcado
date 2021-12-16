@@ -45,7 +45,7 @@ public class VentanaAhorcado extends javax.swing.JFrame {
     }
     private void dibujaImagen(int numeroImagen){
         URL nombreImagen = null;
-        switch(numeroImagen){
+        switch(numeroImagen){ //Imagenes ahorcado fallos.
             case 0 : nombreImagen=getClass().getResource("/imagenes/ahorcado_0.png"); break;
             case 1 : nombreImagen=getClass().getResource("/imagenes/ahorcado_1.png"); break;
             case 2 : nombreImagen=getClass().getResource("/imagenes/ahorcado_2.png"); break;
