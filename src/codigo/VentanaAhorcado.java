@@ -37,7 +37,7 @@ public class VentanaAhorcado extends javax.swing.JFrame {
             
             //Perder
 
-            if (numeroFallos > 5) { //Si pierdes, no puedes pulsar más letras.
+            if (numeroFallos == 6) { //Si pierdes, no puedes pulsar más letras.
                 dibujaImagen(8); //Imagen de perder
                 apagarBotones(); //Acaba la partida, has perdidido.
             }
