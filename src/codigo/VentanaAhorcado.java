@@ -1,9 +1,6 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 package codigo;
 
+import java.awt.Component;
 import java.awt.Image;
 import java.net.URL;
 import java.util.Random;
@@ -37,6 +34,32 @@ public class VentanaAhorcado extends javax.swing.JFrame {
         } else {
             numeroFallos++;
             dibujaImagen(numeroFallos);
+            
+            //Perder
+
+            if (numeroFallos > 5) { //Si pierdes, no puedes pulsar más letras.
+                dibujaImagen(8); //Imagen de perder
+                apagarBotones(); //Acaba la partida, has perdidido.
+            }
+        }
+        
+        //Ganar
+        
+        if (palabraConGuiones.contains("_")) {
+        } else { //Ya no hay guiones, victoria
+            dibujaImagen(7); //Imagen de ganar
+            apagarBotones(); //Acaba la partida, has ganado
+        }
+
+    }
+
+    public void apagarBotones() { //No puedes pulsar las letras
+        Component[] componentes = getContentPane().getComponents();
+        for (int i = 0; i < componentes.length; i++) {
+            if (componentes[i] instanceof JButton) {
+
+                componentes[i].setEnabled(false); //Deshabilitar letra
+            }
         }
     }
 
@@ -69,6 +92,12 @@ public class VentanaAhorcado extends javax.swing.JFrame {
             case 6:
                 nombreImagen = getClass().getResource("/imagenes/ahorcado_fin.gif");
                 break;
+            case 7:
+                nombreImagen = getClass().getResource("/imagenes/acertasteTodo.gif");
+                break;
+            case 8:
+                nombreImagen = getClass().getResource("/imagenes/gameOver.gif");
+                break;
             default:
                 nombreImagen = getClass().getResource("/imagenes/ahorcado_fin.gif");
                 break;
@@ -80,10 +109,9 @@ public class VentanaAhorcado extends javax.swing.JFrame {
 
     public VentanaAhorcado() {
         initComponents();
-        dibujaImagen(0);
-        palabraOculta = palabraEnPantalla(listaPalabras);
-        escribeGuiones();
-        //System.out.print(palabraOculta);
+        dibujaImagen(0); //Imagen ahorcado
+        palabraOculta = palabraEnPantalla(listaPalabras); //Palabra
+        escribeGuiones(); //Guiones a adivinar
     }
 
     private String palabraEnPantalla(String[] lista) { //Palabra aleatoria de la lista sale en pantalla
