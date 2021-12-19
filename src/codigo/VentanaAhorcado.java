@@ -9,7 +9,7 @@ import javax.swing.JButton;
 
 /**
  *
- * @author David
+ * @author David Cabrero Jiménez
  */
 public class VentanaAhorcado extends javax.swing.JFrame {
 
